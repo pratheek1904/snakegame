@@ -35,7 +35,7 @@ const Content = styled.div`
     background: papayawhip;
 
   /* Now we have our methods on media and can use them instead of raw queries */
-  ${media.desktop`background: palevioletred;`}
+  ${media.desktop`background: lightgreen;`}
 	${media.laptop`background:  lightseagreen;`}
   ${media.tablet`background: dodgerblue;`}
 	${media.phone`background: indigo;`}
