@@ -21,6 +21,8 @@ const getRandomCoordinates = () => {
 function App() {
 	const [snakeDots, setSnakeDots] = useState([[0, 0], [0, 2], [0, 4], [0, 6]]);
 	const [foodDot, setFoodDot] = useState(getRandomCoordinates());
+	const [poisonFoodOccurence,setPoisonFoodOccurence]=useState(1);
+	const[active,setActive]=useState(Math.floor(Math.random()*50))
 	const[poisonFood,setPoisonFood]=useState(getRandomCoordinates());
 	const [direction, setDirection] = useState('RIGHT');
 	const [alive, setAlive] = useState(false);
@@ -101,7 +103,10 @@ function App() {
 			setPoisonFood(getRandomCoordinates());
 			enlargeSnake();
 			increaseSpeed();
-			setPoint(point + 10);
+			// if(point%5===0){
+			// 	setActive(false);
+			// }
+			setPoint(point + 1);
 		}
 	}
 
@@ -165,7 +170,12 @@ function App() {
 					<Wrapper>
 						<Snake snakeDots={snakeDots} />
 						<Food foodDot={foodDot} />
-						<PoisonousFood foodDot={poisonFood} />
+					{
+						point===0?"":
+						(active % point==0?"":<PoisonousFood foodDot={poisonFood} />)
+						
+					}
+					
 					</Wrapper>
 				</div>
 			) : (
