@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import Snake from './snake';
 import Food from './food';
+import PoisonousFood from './poisonous_food';
 import Layout from './layout';
 
 import snakeImage from './assests/images/snake.gif'
@@ -20,6 +21,7 @@ const getRandomCoordinates = () => {
 function App() {
 	const [snakeDots, setSnakeDots] = useState([[0, 0], [0, 2], [0, 4], [0, 6]]);
 	const [foodDot, setFoodDot] = useState(getRandomCoordinates());
+	const[poisonFood,setPoisonFood]=useState(getRandomCoordinates());
 	const [direction, setDirection] = useState('RIGHT');
 	const [alive, setAlive] = useState(false);
 	const [speed, setSpeed] = useState(300);
@@ -90,8 +92,13 @@ function App() {
 	//	[[10, 10], [10, 12], [10, 14], [10, 16]]
 
 		let food = foodDot; //10,16
+		let poison_food=poisonFood;
+		if(head[0]===poison_food[0] && head[1]===poison_food[1]){
+			onGameOver()
+		}
 		if (head[0] === food[0] && head[1] === food[1]) {
 			setFoodDot(getRandomCoordinates());
+			setPoisonFood(getRandomCoordinates());
 			enlargeSnake();
 			increaseSpeed();
 			setPoint(point + 10);
@@ -158,6 +165,7 @@ function App() {
 					<Wrapper>
 						<Snake snakeDots={snakeDots} />
 						<Food foodDot={foodDot} />
+						<PoisonousFood foodDot={poisonFood} />
 					</Wrapper>
 				</div>
 			) : (
