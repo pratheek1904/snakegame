@@ -30,6 +30,7 @@ function App() {
 	const [name, setName] = useState('Play');
 	const [point, setPoint] = useState(0);
     const[title,setTitle]=useState("Snake Game with react")
+	
 	useEffect(() => {
 		document.onkeydown = onKeyDown;
 		checkIfOutOfBorders();
@@ -65,7 +66,7 @@ function App() {
 		if (state === true) {
 			let dots = [...snakeDots];
 			let head = dots[dots.length - 1];//10,16
-//[[10, 10], [10, 12], [10, 14], [10, 16]]
+//[[10, 10], [10, 12], [10, 14], [10, 16],[10,18]]
 			switch (direction) {
 				case 'RIGHT':
 					head = [head[0], head[1] + 2];
@@ -82,8 +83,8 @@ function App() {
 				default:
 					break;
 			}
-			dots.push(head);
-			dots.shift();
+			dots.push(head);//[10, 10], [10, 12], [10, 14], [10, 16],[10,18]
+			dots.shift();// [10, 12], [10, 14], [10, 16],[10,18]
 			setSnakeDots(dots);
 		}
 	}
@@ -120,7 +121,8 @@ function App() {
 	function onGameOver() {
 		setAlive(false);
 		setSnakeDots([[0, 0], [0, 2], [0, 4], [0, 6]]);
-		// setFoodDot([10, 10]);
+		setFoodDot([10, 10]);
+		setPoint(0)
 		setDirection('RIGHT');
 		setTitle("Game Over")
 	}
@@ -152,7 +154,7 @@ function App() {
 	function rePlay() {
 		setDirection('RIGHT');
 		setName('Play again');
-		setPoint(0);
+		// setPoint(0);
 		setAlive(true);
 		setTitle("Snake Game with React")
 	}
