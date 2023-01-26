@@ -20,7 +20,7 @@ const getRandomCoordinates = () => {
 };
 
 function App() {
-	const [snakeDots, setSnakeDots] = useState([[0, 0], [0, 2], [0, 4], [0, 6]]);
+	const [snakeDots, setSnakeDots] = useState([[10, 10], [10, 12], [10, 14], [10, 16]]);
 	const [foodDot, setFoodDot] = useState(getRandomCoordinates());
 	const[active,setActive]=useState(true)
 	const[poisonFood,setPoisonFood]=useState(getRandomCoordinates());
