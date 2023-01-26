@@ -11,6 +11,7 @@ import coinImage from './assests/images/coin.gif'
 
 
 const getRandomCoordinates = () => {
+
 	let min = 1;
 	let max = 28;
 	let x = Math.floor((Math.random() * (max - min + 1) + min) / 2) * 2;
@@ -21,8 +22,7 @@ const getRandomCoordinates = () => {
 function App() {
 	const [snakeDots, setSnakeDots] = useState([[0, 0], [0, 2], [0, 4], [0, 6]]);
 	const [foodDot, setFoodDot] = useState(getRandomCoordinates());
-	const [poisonFoodOccurence,setPoisonFoodOccurence]=useState(1);
-	const[active,setActive]=useState(Math.floor(Math.random()*50))
+	const[active,setActive]=useState(true)
 	const[poisonFood,setPoisonFood]=useState(getRandomCoordinates());
 	const [direction, setDirection] = useState('RIGHT');
 	const [alive, setAlive] = useState(false);
@@ -33,9 +33,8 @@ function App() {
 	useEffect(() => {
 		document.onkeydown = onKeyDown;
 		checkIfOutOfBorders();
-		checkIfCollapsed();
 		checkIfEat();
-
+	
 		const run = setInterval(() => {
 			moveSnake(alive);
 		}, speed);
@@ -90,6 +89,7 @@ function App() {
 	}
 
 	function checkIfEat() {
+		
 		let head = snakeDots[snakeDots.length - 1];//10,16
 	//	[[10, 10], [10, 12], [10, 14], [10, 16]]
 
@@ -100,7 +100,9 @@ function App() {
 		}
 		if (head[0] === food[0] && head[1] === food[1]) {
 			setFoodDot(getRandomCoordinates());
-			setPoisonFood(getRandomCoordinates());
+			if(active){
+				setPoisonFood(getRandomCoordinates());
+			}
 			enlargeSnake();
 			increaseSpeed();
 			// if(point%5===0){
@@ -108,6 +110,11 @@ function App() {
 			// }
 			setPoint(point + 1);
 		}
+	
+		if(point%5===0||point%7===0){
+			setActive(false)
+		}
+		else{setActive(true)}
 	}
 
 	function onGameOver() {
@@ -125,18 +132,9 @@ function App() {
 		}
 	}
 	  
-	function checkIfCollapsed() {
-		// let snake = [...snakeDots];
-		// const head = snake[snake.length - 1];
-		// snake.pop();
-		// snake.forEach((dot, index) => {
-		// 	if (head[0] === dot[0] && head[1] === dot[1]) {
-		// 		onGameOver();
-		// 	}
-		// });
-	}
 
 	function enlargeSnake() {
+	
 	//	[[10, 10], [10, 12], [10, 14], [10, 16]]            
 	                              //10,16              //[[10, 10], [10, 12], [10, 14], [10, 16]] 
 		let newSnake = [snakeDots[snakeDots.length - 1], ...snakeDots];
@@ -170,9 +168,8 @@ function App() {
 					<Wrapper>
 						<Snake snakeDots={snakeDots} />
 						<Food foodDot={foodDot} />
-					{
-						point===0?"":
-						(active % point==0?"":<PoisonousFood foodDot={poisonFood} />)
+					{point===0?"":
+						(active?"":<PoisonousFood foodDot={poisonFood} />)
 						
 					}
 					

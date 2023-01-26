@@ -14,7 +14,7 @@ const FoodItem = styled.div`
 	/* background-image: url(${coinImage});
 	background-repeat: no-repeat;
 	background-size: cover; */
-	background: tomato;
+	background: darkgreen;
 	height: 2rem;
 	width: 2rem;
 	border-radius: 50%;
