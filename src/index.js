@@ -162,7 +162,7 @@ function App() {
 			{alive ? (
 				<div>
 					<Box>
-						<Content>{point} </Content>
+						<Content>Your Points:{point} </Content>
 						<CoinImage />
 					</Box>
 					<Wrapper>
@@ -224,6 +224,7 @@ const Wrapper = styled.section`
 	/* margin: 2rem; */
 	height: 30rem;
 	width: 30rem;
+	margin-bottom: 20px;
 	background: papayawhip;
 `;
 
