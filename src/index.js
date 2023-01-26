@@ -29,7 +29,7 @@ function App() {
 	const [speed, setSpeed] = useState(300);
 	const [name, setName] = useState('Play');
 	const [point, setPoint] = useState(0);
-
+    const[title,setTitle]=useState("Snake Game with react")
 	useEffect(() => {
 		document.onkeydown = onKeyDown;
 		checkIfOutOfBorders();
@@ -122,6 +122,7 @@ function App() {
 		setSnakeDots([[0, 0], [0, 2], [0, 4], [0, 6]]);
 		// setFoodDot([10, 10]);
 		setDirection('RIGHT');
+		setTitle("Game Over")
 	}
 
 	function checkIfOutOfBorders() {
@@ -153,12 +154,13 @@ function App() {
 		setName('Play again');
 		setPoint(0);
 		setAlive(true);
+		setTitle("Snake Game with React")
 	}
 
 	return (
 		<Layout>
 			<SnakeImage />
-			<Title>Snake game with React</Title>
+			<Title>{title}</Title>
 			{alive ? (
 				<div>
 					<Box>
